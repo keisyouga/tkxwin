@@ -1,0 +1,70 @@
+tkxwin
+================
+
+x11 window commands extension for tcl/tk
+
+usage
+================
+
+see 
+  [test1.tcl](test1.tcl)
+  [test2.tcl](test2.tcl)
+  [test3.tcl](test3.tcl)
+
+commands
+----------------
+
+- ::tkxwin::grabKey _windowid_ _procName_
+
+    grab window. keypress information is obtained by proc named procName.
+
+- ::tkxwin::ungrabKey _windowid_
+
+    ungrab window.
+
+- ::tkxwin::registerHotkey _key_ _script_
+
+    register hotkey and script. script is executed when key is pressed.
+
+- ::tkxwin::unregisterHotkey _key_
+
+    unregister hotkey.
+
+- ::tkxwin::sendUnicode _?-delay microsec?_ _string_
+
+    send unicode to the active window. delays microsec between sending each character, default is 40000 microsec.
+
+- ::tkxwin::getActiveWindowId
+
+    get active window id.
+
+install
+----------------
+
+- build dependencies
+  - c compiler
+  - x11 development files
+  - tcl/tk development files
+
+- compile
+
+        $ make
+
+- install
+
+  place _libtkxwin.so_ and _pkgIndex.tcl_ under ::auto_path directory.
+
+hotkey and grabkey
+----------------
+
+hotkey and grabkey both uses XGrabKey().
+
+- hotkey
+  - target is root window.
+  - grab specific key.
+  - when hotkey is pressed, run registered script.
+
+- grabkey
+  - target is specific window.
+  - grab any key
+  - when key is pressed in target window, run callback with key information.
